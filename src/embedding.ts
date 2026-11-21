@@ -151,6 +151,9 @@ export class TransformersEmbeddingBackend implements EmbeddingBackend {
         // first download lands outside the working directory.
         env.cacheDir = this.cacheDir;
         env.allowRemoteModels = true;
+        // Allow pointing the model download at a Hugging Face mirror
+        // (e.g. https://hf-mirror.com) on networks where huggingface.co is blocked.
+        env.remoteHost = process.env.DSH_SKILL_ROUTER_HF_ENDPOINT || 'https://huggingface.co';
         return pipeline('feature-extraction', this.modelId, {
           dtype: this.dtype,
           // Single-threaded inference: the e5 family's vectors concentrate
