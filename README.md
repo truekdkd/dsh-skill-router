@@ -116,6 +116,15 @@ from huggingface.co into `<cacheDir>/models`, and the skill-embedding index
 persists at `<cacheDir>/skill-index.json` (atomic writes, tagged with the
 model id), so unchanged skills are never re-embedded after a restart.
 
+If `huggingface.co` is unreachable (for example behind a network that blocks
+it), point the model download at a mirror with `DSH_SKILL_ROUTER_HF_ENDPOINT`:
+
+```bash
+DSH_SKILL_ROUTER_HF_ENDPOINT=https://hf-mirror.com
+```
+
+It defaults to `https://huggingface.co` when unset.
+
 ## Dev note
 
 `node_modules/@deepseek-ai` and `node_modules/js-yaml` are local symlinks into
